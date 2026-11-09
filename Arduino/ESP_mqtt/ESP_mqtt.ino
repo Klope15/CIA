@@ -15,7 +15,7 @@ const char ssid[] = "sensors";
 const char pass[] = "FGeRiGzg";
 
 // ########### MQTT CONFIG ###########
-const String topic = "REMEMBER_TO_CHANGE";
+const String topic = "Bænk";
 const String senderID = "ESP"; //giver mulighed for at skelne mellem afsendere
 
 // ________NOW FOLLOWS MAIN PROGRAMS______
