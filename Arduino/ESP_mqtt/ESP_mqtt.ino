@@ -42,21 +42,21 @@ void loop()
 {
   // DO YOUR THING HERE
   client.loop(); //keep MQTT running
-  activatedLED()
+  activateLED();
 }
+
 
 void activateLED(){
   int lux = analogRead(PHOTO_PIN);
 
   if (lux < 1300){
-    Serial.println("On");
-    sender(x)
+    Serial.println("lux",lux);
 
   } else {
-    Serial.println(value);
+    Serial.println("lux",lux);
   }
  i++;
-    if (value < lux ) {
+    if (lux < 1300 ) {
         for(int i = 0; i < NUM_LEDS; i++){
     leds[i] = CRGB(0, 255, 0);
     FastLED.show();
