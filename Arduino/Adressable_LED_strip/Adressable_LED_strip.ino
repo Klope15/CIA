@@ -15,21 +15,21 @@ void setup() {
 }
 
 void loop() {
-  int value = analogRead(PHOTO_PIN);
+  int lux = analogRead(PHOTO_PIN);
  
 
   //Serial.println(value);
 
   delay(250);
 
-  if (value < 1300){
+  if (lux < 1300){
     Serial.println("On");
 
   } else {
     Serial.println("Off");
   }
  i++;
-    if (value < 1300 ) {
+    if (value < lux ) {
         for(int i = 0; i < NUM_LEDS; i++){
     leds[i] = CRGB(0, 255, 0);
     FastLED.show();
