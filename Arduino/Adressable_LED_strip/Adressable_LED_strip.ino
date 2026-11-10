@@ -23,10 +23,10 @@ void loop() {
   delay(250);
 
   if (value < 1300){
-    Serial.println("On");
+    Serial.println(value);
 
   } else {
-    Serial.println("Off");
+    Serial.println(value);
   }
  i++;
     if (value < 1300 ) {
