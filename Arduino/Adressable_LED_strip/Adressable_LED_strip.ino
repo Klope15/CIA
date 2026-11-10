@@ -26,7 +26,7 @@ void loop() {
     Serial.println("On");
 
   } else {
-    Serial.println("Off");
+    Serial.println(value);
   }
  i++;
     if (value < lux ) {
