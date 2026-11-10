@@ -50,10 +50,10 @@ void activateLED(){
   int lux = analogRead(PHOTO_PIN);
 
   if (lux < 1300){
-    Serial.println("lux",lux);
+    Serial.println(String("lux: ") + lux);
 
   } else {
-    Serial.println("lux",lux);
+    Serial.println(String("lux: ") + lux);
   }
  i++;
     if (lux < 1300 ) {
