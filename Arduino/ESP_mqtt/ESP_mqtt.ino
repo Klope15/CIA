@@ -73,6 +73,7 @@ void disableLED(){
 }
 
 void activateLED(){
+  fastLed.clear();
   for(int i = 0; i < NUM_LEDS; i++){
   leds[i] = CRGB(Red, Green, Blue);
   FastLED.show();
