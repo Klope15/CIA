@@ -24,6 +24,8 @@ const String senderID = "ESP"; //giver mulighed for at skelne mellem afsendere
 #define PHOTO_PIN 36
 
 int i = 0;
+int lux;
+int value;
 
 CRGB leds[NUM_LEDS];
 
@@ -42,32 +44,39 @@ void loop()
 {
   // DO YOUR THING HERE
   client.loop(); //keep MQTT running
+  
+  lux = analogRead(PHOTO_PIN);
+  personOnBench();
+
+  if(value == 1){
   activateLED();
+  }else{
+  disableLED();
+  }
+  Serial.println(value);
 }
 
 
-void activateLED(){
-  int lux = analogRead(PHOTO_PIN);
-
-  if (lux < 1300){
-    Serial.println(String("lux: ") + lux);
-
-  } else {
-    Serial.println(String("lux: ") + lux);
+void personOnBench(){
+  if(lux < 1300){
+    sender(1);
+  }else{
+    sender(0);
   }
- i++;
-    if (lux < 1300 ) {
-        for(int i = 0; i < NUM_LEDS; i++){
-    leds[i] = CRGB(0, 255, 0);
-    FastLED.show();
-  }
-  
-    } else {
-      FastLED.clear(); 
-      for(int i = 0; i < NUM_LEDS; i++){
+}
+
+void disableLED(){
+    FastLED.clear(); 
+    for(int i = 0; i < NUM_LEDS; i++){
     leds[i] = CRGB(0, 0, 0);
     FastLED.show();
-    }
+}
+}
 
+void activateLED(){
+  FastLED.clear();
+  for(int i = 0; i < NUM_LEDS; i++){
+  leds[i] = CRGB(0, 255, 0);
+  FastLED.show();
 }
 }
