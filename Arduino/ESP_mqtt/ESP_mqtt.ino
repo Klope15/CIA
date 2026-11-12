@@ -17,7 +17,7 @@ const char pass[] = "FGeRiGzg";
 
 // ########### MQTT CONFIG ###########
 const String topic = "Bænk";
-const String senderID = "ESP2"; //giver mulighed for at skelne mellem afsendere
+const String senderID = "ESP2"; // Husk at ændre til den ESP du bruger!
 
 #define NUM_LEDS 10
 #define DATA_PIN 23
@@ -26,6 +26,7 @@ const String senderID = "ESP2"; //giver mulighed for at skelne mellem afsendere
 int i = 0;
 int lux; //value for light sensor
 
+//farvekoder vi sender med mqtt
 int Red = 0;
 int Green = 0;
 int Blue = 0;
@@ -40,7 +41,7 @@ void setup() {
   connectWifi();
   connectMQTT();
 
-  FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
+  FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS); //Led-setup
 }
 
 void loop() 
@@ -50,10 +51,11 @@ void loop()
   
   lux = analogRead(PHOTO_PIN);
 
-  personOnBench();
+  personOnPillow(); //checks if someone is sitting on pillow
 
-  updateLED();
+  updateLED(); //updates the Led
 
+  //for debugging
   Serial.println(Red);
   Serial.println(Blue);
   Serial.println(Green);
@@ -61,26 +63,18 @@ void loop()
 }
 
 
-void personOnBench(){
-  if(lux < 1300){
-    sender(255);
+void personOnPillow(){
+  if(lux < 1300){ // check if the light sensor is being covered
+    sender(255); //send max colour value
   }else{
-    sender(0);
+    sender(0); 
   }
-}
-
-void disableLED(){
-    FastLED.clear(); 
-    for(int i = 0; i < NUM_LEDS; i++){
-    leds[i] = CRGB(Red, Green, Blue);
-    FastLED.show();
-}
 }
 
 void updateLED(){
   FastLED.clear();
   for(int i = 0; i < NUM_LEDS; i++){
-  leds[i] = CRGB(Red, Green, Blue);
+  leds[i] = CRGB(Red, Green, Blue); //display the colorvalues recieved through mqtt
   FastLED.show();
 }
 }
