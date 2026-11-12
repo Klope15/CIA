@@ -52,7 +52,10 @@ void loop()
 
   personOnBench();
 
-  activateLED();
+  updateLED();
+
+  Serial.println(lux);
+
 }
 
 
@@ -72,7 +75,8 @@ void disableLED(){
 }
 }
 
-void activateLED(){
+void updateLED(){
+  FastLED.clear();
   for(int i = 0; i < NUM_LEDS; i++){
   leds[i] = CRGB(Red, Green, Blue);
   FastLED.show();
