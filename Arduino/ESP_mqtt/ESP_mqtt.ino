@@ -17,15 +17,18 @@ const char pass[] = "FGeRiGzg";
 
 // ########### MQTT CONFIG ###########
 const String topic = "Bænk";
-const String senderID = "ESP"; //giver mulighed for at skelne mellem afsendere
+const String senderID = "ESP1"; //giver mulighed for at skelne mellem afsendere
 
 #define NUM_LEDS 10
 #define DATA_PIN 23
 #define PHOTO_PIN 36
 
 int i = 0;
-int lux;
-int value;
+int lux; //value for light sensor
+
+int Red = 0;
+int Green = 0;
+int Blue = 0;
 
 CRGB leds[NUM_LEDS];
 
@@ -46,20 +49,16 @@ void loop()
   client.loop(); //keep MQTT running
   
   lux = analogRead(PHOTO_PIN);
+
   personOnBench();
 
-  if(value == 1){
   activateLED();
-  }else{
-  disableLED();
-  }
-  Serial.println(value);
 }
 
 
 void personOnBench(){
   if(lux < 1300){
-    sender(1);
+    sender(255);
   }else{
     sender(0);
   }
@@ -68,14 +67,14 @@ void personOnBench(){
 void disableLED(){
     FastLED.clear(); 
     for(int i = 0; i < NUM_LEDS; i++){
-    leds[i] = CRGB(0, 0, 0);
+    leds[i] = CRGB(Red, Green, Blue);
     FastLED.show();
 }
 }
 
 void activateLED(){
   for(int i = 0; i < NUM_LEDS; i++){
-  leds[i] = CRGB(0, 255, 0);
+  leds[i] = CRGB(Red, Green, Blue);
   FastLED.show();
 }
 }

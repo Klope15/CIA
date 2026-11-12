@@ -1,9 +1,10 @@
 void modtager(String &topic, String &indhold) 
 {
+  delay(100);
   deserializeJson(recieverBuffer,indhold);
   String afsender = recieverBuffer["from"];
-  value = recieverBuffer["val"];
-  Serial.println(value);
-  //do something with the value... eg change a global value
+    if(afsender = "ESP1"){
+    Red = recieverBuffer["val"];
+  }
  
 }
