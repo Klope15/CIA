@@ -17,7 +17,7 @@ const char pass[] = "FGeRiGzg";
 
 // ########### MQTT CONFIG ###########
 const String topic = "Bænk";
-const String senderID = "ESP1"; //giver mulighed for at skelne mellem afsendere
+const String senderID = "ESP2"; //giver mulighed for at skelne mellem afsendere
 
 #define NUM_LEDS 10
 #define DATA_PIN 23
@@ -54,7 +54,9 @@ void loop()
 
   updateLED();
 
-  Serial.println(lux);
+  Serial.println(Red);
+  Serial.println(Blue);
+  Serial.println(Green);
 
 }
 
