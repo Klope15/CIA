@@ -10,7 +10,7 @@ function preload() {
   detector = ml5.objectDetector('cocossd');
 }
 
-function setup() {
+function cocoSetup() {
   createCanvas(640, 480);
   textSize(24);
   video = createCapture(VIDEO);
@@ -19,7 +19,7 @@ function setup() {
 }
 
 
-function draw() {
+function cocoDraw() {
   image(video, 0, 0);
   
   itemCount=0;  //reset counting 
