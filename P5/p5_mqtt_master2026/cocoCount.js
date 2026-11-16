@@ -1,15 +1,3 @@
-let video; 
-let detector; 
-let detections = []; 
-let itemCount=0;
-let previousCount=0;
-
-let itemToCount="person"; //you can change this into any of the 80 object-types
-
-function preload() {
-  detector = ml5.objectDetector('cocossd');
-}
-
 function cocoSetup() {
   createCanvas(640, 480);
   textSize(24);
