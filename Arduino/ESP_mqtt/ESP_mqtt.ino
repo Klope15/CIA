@@ -81,11 +81,11 @@ void updateLED() {
 
 void transitionLED(){
 
-  fill_solid(&leds[2], 1, CRGB(0, 0, Blue));   
-  fill_solid(&leds[3], 1, CRGB(Red, 0, 0));    
+  fill_solid(&leds[2], 1, CRGB(Red, 0, Blue));   
+  fill_solid(&leds[3], 1, CRGB(Red, 0, Blue));    
 
-  fill_solid(&leds[5], 1, CRGB(Red, 0, 0));    
-  fill_solid(&leds[6], 1, CRGB(0, Green, 0));
+  fill_solid(&leds[5], 1, CRGB(Red, Green, 0));    
+  fill_solid(&leds[6], 1, CRGB(Red, Green, 0));
   
   }
   
