@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <title>Kort over DR Byen</title>
+
+  <!-- p5.js -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@2.4.0/lib/p5.min.js"></script>
+
+  <!-- Leaflet (kortet) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+    body { margin: 0; font-family: sans-serif; }
+
+    /* Kassen der holder både kortet og p5-canvasset */
+    #holder { position: relative; width: 800px; height: 600px; }
+
+    /* Kortet fylder hele kassen */
+    #kort { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+    /* p5-canvasset ligger ovenpå kortet.
+       pointer-events: none betyder at musen går "igennem" canvasset,
+       så man stadig kan trække og zoome i kortet nedenunder. */
+    #holder canvas {
+      position: absolute; top: 0; left: 0;
+      z-index: 1000;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="holder">
+    <div id="kort"></div>
+  </div>
+  <script src="Kort_til_CIA.js"></script>
+</body>
+</html>
