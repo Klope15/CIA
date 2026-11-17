@@ -17,6 +17,6 @@ if(afsender == "ESP3"){
     Green = recieverBuffer["val"];
   }
 updateLED();
-//transitionLED();
+transitionLED();
 
 }

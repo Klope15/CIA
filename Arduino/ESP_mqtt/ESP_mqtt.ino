@@ -17,7 +17,7 @@ const char pass[] = "FGeRiGzg";
 
 // ########### MQTT CONFIG ###########
 const String topic = "Bænk";
-const String senderID = "ESP1"; // Husk at ændre til den ESP du bruger!
+const String senderID = "ESP2"; // Husk at ændre til den ESP du bruger!
 
 #define NUM_LEDS 10
 #define DATA_PIN 23
@@ -80,7 +80,7 @@ void updateLED() {
 }
 
 void transitionLED(){
-  delay(3000);
+
   fill_solid(&leds[2], 1, CRGB(0, 0, Blue));   
   fill_solid(&leds[3], 1, CRGB(Red, 0, 0));    
 
