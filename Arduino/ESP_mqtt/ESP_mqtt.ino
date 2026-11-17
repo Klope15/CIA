@@ -17,7 +17,7 @@ const char pass[] = "FGeRiGzg";
 
 // ########### MQTT CONFIG ###########
 const String topic = "Bænk";
-const String senderID = "ESP2"; // Husk at ændre til den ESP du bruger!
+const String senderID = "ESP1"; // Husk at ændre til den ESP du bruger!
 
 #define NUM_LEDS 10
 #define DATA_PIN 23
@@ -71,10 +71,25 @@ void personOnPillow(){
   }
 }
 
-void updateLED(){
-  FastLED.clear();
-  for(int i = 0; i < NUM_LEDS; i++){
-  leds[i] = CRGB(Red, Green, Blue); //display the colorvalues recieved through mqtt
+ 
+void updateLED() {
+  fill_solid(&leds[0], 3, CRGB(0, 0, Blue));   // LED 1-3 blue (ESP2)
+  fill_solid(&leds[3], 3, CRGB(Red, 0, 0));    // LED 4-6 red (ESP1)
+  fill_solid(&leds[6], 4, CRGB(0, Green, 0));  // LED 7-10 green (ESP3)
   FastLED.show();
 }
-}
+
+void transitionLED(){
+  delay(3000);
+  fill_solid(&leds[2], 1, CRGB(0, 0, Blue));   
+  fill_solid(&leds[3], 1, CRGB(Red, 0, 0));    
+
+  fill_solid(&leds[5], 1, CRGB(Red, 0, 0));    
+  fill_solid(&leds[6], 1, CRGB(0, Green, 0));
+  
+  }
+  
+
+
+
+
