@@ -86,6 +86,7 @@ void transitionLED(){
 
   fill_solid(&leds[5], 1, CRGB(Red, Green, 0));    
   fill_solid(&leds[6], 1, CRGB(Red, Green, 0));
+  FastLED.show();
   
   }
   
