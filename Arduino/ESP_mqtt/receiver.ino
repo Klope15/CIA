@@ -15,5 +15,7 @@ if(afsender == "ESP2"){
 if(afsender == "ESP3"){
     Green = recieverBuffer["val"];
   }
-
+if (afsender == "Camera1") {
+  peopleCount = recieverBuffer["val"];
+}
 }
