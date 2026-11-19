@@ -2,7 +2,7 @@
 function preload() {
   detector = ml5.objectDetector('cocossd');
 }
-const topic = "bænk";
+const topic = "Bænk";
 const afsenderID = "Camera1";
 let video; 
 let detector; 
@@ -18,7 +18,6 @@ function setup() {
 
 function draw() {
  cocoDraw();
- sender(itemCount);
 } 
 
 

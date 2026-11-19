@@ -27,6 +27,7 @@ function cocoDraw() {
   {
     previousCount =itemCount;
     console.log(itemCount);
+    sender(itemCount);
   }
   text(itemCount,20,20);
   
