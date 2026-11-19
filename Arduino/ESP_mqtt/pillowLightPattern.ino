@@ -3,8 +3,9 @@ void pillowLightPatternSetup() {
 }
 
 void pillowLightPatternloop() {
+  Serial.println(peopleCount);
 
-  speed = map(peopleCount, 1, 10, 500, 50);
+  speed = map(peopleCount, 1, 10, 500, 5);
 
   if (millis() - previousMillis >= speed) {
     previousMillis = millis();

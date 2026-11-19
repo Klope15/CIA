@@ -13,9 +13,11 @@ void pultLightloop () {
   updateLED(); //updates the Led
 
   //for debugging
+  /*
   Serial.println(Red);
   Serial.println(Blue);
   Serial.println(Green);
+  */
 }
 
 void personOnPillow(){
