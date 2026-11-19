@@ -16,6 +16,7 @@ void connectMQTT() //--------------------------------------------
   client.begin("broker.hivemq.com", net);
   client.onMessage(modtager);
 
+
   //-- Generate a Unique User ID 
   String dummy = "ITU";
   const char chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
