@@ -25,57 +25,58 @@ JsonDocument recieverBuffer;
 const char ssid[] = "sensors";
 const char pass[] = "FGeRiGzg";
 
-// ########### MQTT CONFIG ###########
-const String topic = "Bænk";
-const String senderID = "Esp4"; // Husk at ændre til den ESP du bruger!
+  // ########### MQTT CONFIG ###########
+  const String topic = "Bænk";
+  const String senderID = "Esp4"; // Husk at ændre til den ESP du bruger!
 
-// ____VARIABLES FROM PULTLIGHT____
+  // ____VARIABLES FROM PULTLIGHT____
 
-int i = 0;
-int lux; //value for light sensor
+  int i = 0;
+  int lux; //value for light sensor
 
-//farvekoder vi sender med mqtt
-int Red = 0;
-int Green = 0;
-int Blue = 0;
+  //farvekoder vi sender med mqtt
+  int Red = 0;
+  int Green = 0;
+  int Blue = 0;
 
-CRGB leds[NUM_LEDS]; 
+  // millis variabel
+  unsigned long previousMillis = 0;
 
-// ____VARIABLES FROM PILLOWLIGHTPATTERN____
+  CRGB leds[NUM_LEDS]; 
 
-CRGB ColorPattern[pillowLightpatternLength] = {
-  CRGB(0,0,255),   CRGB(0,0,255),   CRGB(0,0,255),   // blå
-  CRGB(0,0,255),   CRGB(0,0,255),   CRGB(0,0,255),   // blå
-  CRGB(0,255,0),   CRGB(0,255,0),   CRGB(0,255,0),   // grøn
-  CRGB(0,255,0),   CRGB(0,255,0),   CRGB(0,255,0),   // grøn
-  CRGB(255,0,0),   CRGB(255,0,0),   CRGB(255,0,0),   // rød
-  CRGB(255,0,0),   CRGB(255,0,0),   CRGB(255,0,0)    // rød
-};
+  // ____VARIABLES FROM PILLOWLIGHTPATTERN____
 
-CRGB pillowLeds[pillowLightPatternNumLEDS]; // rgb leds for pudens lys 
-  
-int x = 0; // En variable til at gemme hvor meget hver pixel har flyttet sig pr loop
-int speed = 0;
-int peopleCount = 0;
+  CRGB ColorPattern[pillowLightpatternLength] = {
+    CRGB(0,0, 255),  CRGB(0,0,255),   CRGB(0,0,255),   // blå
+    CRGB(0,0,255),   CRGB(0,0,255),   CRGB(0,0,255),   // blå
+    CRGB(0,255,0),   CRGB(0,255,0),   CRGB(0,255,0),   // grøn
+    CRGB(0,255,0),   CRGB(0,255,0),   CRGB(0,255,0),   // grøn
+    CRGB(255,0,0),   CRGB(255,0,0),   CRGB(255,0,0),   // rød
+    CRGB(255,0,0),   CRGB(255,0,0),   CRGB(255,0,0)    // rød
+  };
+
+  CRGB pillowLeds[pillowLightPatternNumLEDS]; // rgb leds for pudens lys 
+    
+  int x = 0; // En variable til at gemme hvor meget hver pixel har flyttet sig pr loop
+  int speed = 0;
+  int peopleCount = 0;
 
 
-// ________NOW FOLLOWS MAIN PROGRAMS______
+  // ________NOW FOLLOWS MAIN PROGRAMS______
 
-void setup() {
-  Serial.begin(9600);
-  WiFi.begin(ssid, pass);
-  connectWifi();
-  connectMQTT();
-  pultLightSetup();
-  pillowLightPatternSetup();
-}
+  void setup() {
+    Serial.begin(9600);
+    WiFi.begin(ssid, pass);
+    connectWifi();
+    connectMQTT();
+    pultLightSetup();
+    pillowLightPatternSetup();
+  }
 
-void loop() 
-{
- pultLightloop(); //main loop for the pult 
- pillowLightPatternloop(); // main loop for the light on the pillow 
+  void loop() 
+  {
+  pultLightloop(); //main loop for the pult 
+  pillowLightPatternloop(); // main loop for the light on the pillow 
+  FastLED.show();
 
-}
-
-FastLED.show();
-}
+  }
