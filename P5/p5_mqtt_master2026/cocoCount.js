@@ -1,8 +1,8 @@
 function cocoSetup() {
-  createCanvas(640, 480);
+  createCanvas(windowWidth, windowHeight);
   textSize(24);
   video = createCapture(VIDEO);
-  video.size(640, 480);
+  video.size(windowWidth, windowWidth);
   video.hide();
 }
 
