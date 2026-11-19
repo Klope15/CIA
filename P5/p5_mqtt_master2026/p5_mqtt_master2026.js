@@ -18,7 +18,8 @@ function setup() {
 
 function draw() {
  cocoDraw();
- findFarverSetup (); //tegn gider
+ drawGrid (); //tegn gider
+ 
 } 
 
 

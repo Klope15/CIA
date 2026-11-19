@@ -1,20 +1,23 @@
 function cocoSetup() {
   createCanvas(windowWidth, windowHeight);
   textSize(24);
+  //detect(); //do detection
   video = createCapture(VIDEO);
-  video.size(windowWidth, windowWidth);
+  //video.size(windowWidth, windowHeight);
   video.hide();
 }
 
 
 function cocoDraw() {
-  image(video, 0, 0);
+  image(video, 0, 0, windowWidth, windowHeight);
   
   itemCount=0;  //reset counting 
   
   for (let i = 0; i < detections.length; i++) 
   {
     drawResult(detections[i]); //visualize what was detected
+    findObjectColor(detections[i]); //find farven på objektet
+    drawObjectColor (); //tegn objektets farve 
     
     if (detections[i].label === itemToCount) // if the label fits what we are looking for..
     {
@@ -30,8 +33,9 @@ function cocoDraw() {
     sender(itemCount);
   }
   text(itemCount,20,20);
-  
+
   detect(); //do detection
+
 } 
 
 // Callback function called when objects are detected
@@ -41,6 +45,7 @@ function onDetected(error, results) {
     return;
   }
   detections = results;
+  //detect(); // do detection again (er rykket her for at se om det ville gøre at den ikke køre og tjekker heletiden);
 }
 
 function detect() {
