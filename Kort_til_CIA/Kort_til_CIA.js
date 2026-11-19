@@ -7,7 +7,7 @@
 
 let kort;        // selve kortet
 let valgt = 0;   // hvilket punkt er der klikket på? 0 = ingen, 1, 2 eller 3
-
+let theta = 0;
 
 // --------------------------------------------
 //  PUNKT 1
@@ -37,9 +37,12 @@ function hentBilledePunkt1() {
 function tegnPunkt1() {
   // lat/lon bliver lavet om til x og y på skærmen
   let pos = kort.latLngToContainerPoint([punkt1_lat, punkt1_lon]);
+  punkt1_storrelse = 28+punkt1_storrelse*sin(theta)*0.3
+  theta = theta+0.05
 
   if (punkt1_billede) {
     // Der er et billede: tegn det
+
     image(punkt1_billede, pos.x, pos.y, punkt1_storrelse, punkt1_storrelse);
   } else {
     // Ellers: tegn en cirkel
