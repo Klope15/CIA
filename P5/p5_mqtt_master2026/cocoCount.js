@@ -9,7 +9,7 @@ function cocoSetup() {
 
 
 function cocoDraw() {
-  image(video, 0, 0, windowWidth, windowHeight);
+  //image(video, 0, 0, windowWidth, windowHeight);
   
   itemCount=0;  //reset counting 
   
@@ -53,7 +53,7 @@ function detect() {
 }
 
 //---VISUALIZATION FUNCTIONS
-function drawResult(object) {
+/*function drawResult(object) {
   drawBoundingBox(object);
   drawLabel(object);
 }
@@ -67,5 +67,5 @@ function drawLabel(object) {
   noStroke();
   fill('green');
   text(object.label, object.x + 10, object.y + 24);  
-}
+}*/
 //---END OF VISUALIZATION

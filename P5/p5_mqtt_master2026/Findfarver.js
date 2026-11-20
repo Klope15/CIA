@@ -1,5 +1,5 @@
 //variables for the grid
-let gridSize = 50; 
+let gridSize = 100; 
 //variables of the object in the grid
 let objectCenterX; 
 let objectCenterY;
@@ -12,6 +12,26 @@ let colorTotalG = 0; // for at holde den generelle grønne farve
 let colorTotalB = 0; // for at holde den generelle blå farve
 let pixelCounter = 0; // for at holde styr på hvor mange pixels der er blevet talt med i gennemsnittet(+10 pix for hver omgang i loopet)
 let objectColorAverage; // for at holde den gennemsnitlige farve af objektet i gridet
+
+let comparisonPalette = [
+// red colors
+color(245, 66, 144), // intense pink
+color(252, 131, 61), // intense orange
+color(245, 66, 66), // intense red
+color (235, 103, 101) // light red 
+
+//green colors 
+color(66, 245, 135), // intense green
+color(78, 150, 74), // dark green
+color(245, 245, 66), // intense yellow
+color(237, 232, 154) // light yellow
+
+//blue colors 
+color(66, 135, 245), // intense blue 
+color(134, 219, 252), // clear light blue 
+color(224, 121, 237), // intense purple
+color(14, 37, 110), // dark blue
+];
 
 function drawGrid () {
 //TEGN GRID 

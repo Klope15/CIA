@@ -18,7 +18,7 @@ function setup() {
 
 function draw() {
  cocoDraw();
- drawGrid (); //tegn gider
+ //drawGrid (); //tegn gider
  
 } 
 
