@@ -1,11 +1,18 @@
 function cocoSetup() {
   createCanvas(640, 480);
   textSize(24);
-  video = createCapture(VIDEO);
+    var constraints = {
+    video: {
+      facingMode: "environment"
+    },
+    audio: false
+  }
+  video = createCapture(constraints);
+  
   video.size(640, 480);
   video.hide();
-}
 
+}
 
 function cocoDraw() {
   image(video, 0, 0);
