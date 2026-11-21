@@ -15,14 +15,15 @@ let valgt = 0;   // hvilket punkt er der klikket på? 0 = ingen, 1, 2 eller 3
 
 // rettelser til punkt 1:
 let punkt1_navn      = "Grønningen";
-let punkt1_tekst     = "x.";
+let punkt1_tekst     = "Park og grønne områder på Amager";
 let punkt1_lat       = 55.66027925893464;   
 let punkt1_lon       = 12.587983317621767;
 let punkt1_farve     = "red";      // fx "red", "blue" eller "#ff8800"
-let punkt1_storrelse = 28;         // størrelse i pixels
-let punkt1_billedfil = "";         // fx "ikon1.png". Tom = brug cirkel
+let punkt1_storrelse = 150;         // størrelse i pixels
+let punkt1_billedfil = "Images/Grønningen.png";         // fx "ikon1.png". Tom = brug cirkel
 
 let punkt1_billede;                // her gemmes billedet, når det er hentet
+let thetha = 0;                          // bruges til at rotere billedet
 
 // Henter billedet til punkt 1 (hvis du har skrevet et filnavn)
 function hentBilledePunkt1() {
@@ -37,16 +38,21 @@ function hentBilledePunkt1() {
 function tegnPunkt1() {
   // lat/lon bliver lavet om til x og y på skærmen
   let pos = kort.latLngToContainerPoint([punkt1_lat, punkt1_lon]);
+  
+  //add this when we have mqtt
+  //punkt1_storrelse = 115 + punkt1_storrelse * sin(thetha)*0.5;
+  //thetha += 0.05;
+  
 
   if (punkt1_billede) {
     // Der er et billede: tegn det
-    image(punkt1_billede, pos.x, pos.y, punkt1_storrelse, punkt1_storrelse);
+    image(punkt1_billede, pos.x, pos.y, punkt1_storrelse + 100, punkt1_storrelse);
   } else {
     // Ellers: tegn en cirkel
     fill(punkt1_farve);
     stroke("white");
     strokeWeight(3);
-    circle(pos.x, pos.y, punkt1_storrelse);
+    rect(pos.x, pos.y, punkt1_storrelse, punkt1_storrelse);
   }
 
   // Vis tekstboksen, hvis punkt 1 er valgt
@@ -72,12 +78,12 @@ function klikPunkt1(musX, musY) {
 
 // rettelser til punkt 2:
 let punkt2_navn      = "Fields";
-let punkt2_tekst     = "x.";
+let punkt2_tekst     = "Indkøbscenter på Amager";
 let punkt2_lat       = 55.63011694619102;
 let punkt2_lon       = 12.576139744157004;
 let punkt2_farve     = "blue";
-let punkt2_storrelse = 28;
-let punkt2_billedfil = "";
+let punkt2_storrelse = 150;
+let punkt2_billedfil = "Images/Fields.png";
 
 let punkt2_billede;
 
@@ -95,12 +101,12 @@ function tegnPunkt2() {
   let pos = kort.latLngToContainerPoint([punkt2_lat, punkt2_lon]);
 
   if (punkt2_billede) {
-    image(punkt2_billede, pos.x, pos.y, punkt2_storrelse, punkt2_storrelse);
+    image(punkt2_billede, pos.x, pos.y, punkt2_storrelse + 100, punkt2_storrelse);
   } else {
     fill(punkt2_farve);
     stroke("white");
     strokeWeight(3);
-    circle(pos.x, pos.y, punkt2_storrelse);
+    rect(pos.x, pos.y, punkt2_storrelse, punkt2_storrelse);
   }
 
   if (valgt == 2) {
@@ -124,13 +130,13 @@ function klikPunkt2(musX, musY) {
 // --------------------------------------------
 
 // rettelser til punkt 3:
-let punkt3_navn      = "DR Byen St.";
-let punkt3_tekst     = "Metrostation";
-let punkt3_lat       = 55.6557;
-let punkt3_lon       = 12.5892;
+let punkt3_navn      = "Busstop";
+let punkt3_tekst     = "Busstoppested som ligger ved Røde Mellemvej";
+let punkt3_lat       = 55.641975834404555;
+let punkt3_lon       = 12.590878594965387;
 let punkt3_farve     = "green";
-let punkt3_storrelse = 28;
-let punkt3_billedfil = "";
+let punkt3_storrelse = 150;
+let punkt3_billedfil = "Images/BusStop.png";
 
 let punkt3_billede;
 
@@ -148,7 +154,7 @@ function tegnPunkt3() {
   let pos = kort.latLngToContainerPoint([punkt3_lat, punkt3_lon]);
 
   if (punkt3_billede) {
-    image(punkt3_billede, pos.x, pos.y, punkt3_storrelse, punkt3_storrelse);
+    image(punkt3_billede, pos.x, pos.y, punkt3_storrelse + 100, punkt3_storrelse);
   } else {
     fill(punkt3_farve);
     stroke("white");
@@ -171,13 +177,19 @@ function klikPunkt3(musX, musY) {
   }
 }
 
+/*
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  kort.invalidateSize();   // fortæller Leaflet at kortet skal opdateres
+}
+  */
 
 // --------------------------------------------
 //  SETUP 
 // --------------------------------------------
 
 function setup() {
-  let canvas = createCanvas(800, 600);
+  let canvas = createCanvas(windowWidth, windowHeight);   // lav et canvas der fylder hele skærmen
   canvas.parent("holder");   // læg canvasset oven på kortet
   imageMode(CENTER);         // billeder tegnes ud fra deres midte
 
@@ -185,9 +197,9 @@ function setup() {
 // Lav kortet
 // --------------------------------------------
   kort = L.map("kort", {
-    center: [55.658, 12.590],                       // hvor kortet starter
-    zoom: 16,                                       // startzoom
-    minZoom: 14,                                    // længst ude
+    center: [55.6460416921581, 12.5855731215835],                       // hvor kortet starter
+    zoom: 13.5,                                       // startzoom
+    minZoom: 13.5,                                    // længst ude
     maxZoom: 19,                                    // længst inde
     maxBounds:[[55.622, 12.550], [55.668, 12.625]], // området man kan være i
     maxBoundsViscosity: 1                           // kortet stopper ved kanten
