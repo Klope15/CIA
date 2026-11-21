@@ -278,3 +278,6 @@ function tegnInfoboks(navn, tekst, x, y) {
   textSize(14);
   text(tekst, boksX + 12, boksY + 56);
 }
+
+
+//hej
