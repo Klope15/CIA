@@ -51,11 +51,6 @@ function loadData() {
 }
 
 
-  if (windSound.isPlaying()){
-    setAmplitude();
-  }
-
-
 function setAmplitude(){
   let x = map(weatherData[3].wind,0,10,0,1);
   x = constrain(x,0,1);

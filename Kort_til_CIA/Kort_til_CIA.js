@@ -221,11 +221,6 @@ function setup() {
   hentBilledePunkt3();
 }
 
-function preload(){
-  windSound = loadSound("Sounds/Wind.wav");
-}
-
-
 // --------------------------------------------
 //  DRAW (kører hele tiden)
 // --------------------------------------------
