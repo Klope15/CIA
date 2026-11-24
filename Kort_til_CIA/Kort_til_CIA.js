@@ -58,6 +58,9 @@ function tegnPunkt1() {
   // Vis tekstboksen, hvis punkt 1 er valgt
   if (valgt == 1) {
     tegnInfoboks(punkt1_navn, punkt1_tekst, pos.x, pos.y);
+    if (!windSound.isPlaying()) {
+      windSound.play();
+    }
   }
 }
 
@@ -68,7 +71,6 @@ function klikPunkt1(musX, musY) {
 
   if (afstand < punkt1_storrelse / 2) {
     valgt = 1;
-    windSound.play();
   }
 }
 
@@ -220,6 +222,11 @@ function setup() {
   hentBilledePunkt2();
   hentBilledePunkt3();
 }
+
+function preload(){
+  windSound = loadSound("Sounds/Wind.wav");
+}
+
 
 // --------------------------------------------
 //  DRAW (kører hele tiden)
