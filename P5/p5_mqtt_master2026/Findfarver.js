@@ -18,13 +18,13 @@ let comparisonPalette = [
 color(245, 66, 144), // intense pink
 color(252, 131, 61), // intense orange
 color(245, 66, 66), // intense red
-color (235, 103, 101) // light red 
+color (235, 103, 101), // light red 
 
 //green colors 
 color(66, 245, 135), // intense green
 color(78, 150, 74), // dark green
 color(245, 245, 66), // intense yellow
-color(237, 232, 154) // light yellow
+color(237, 232, 154), // light yellow
 
 //blue colors 
 color(66, 135, 245), // intense blue 
@@ -32,6 +32,9 @@ color(134, 219, 252), // clear light blue
 color(224, 121, 237), // intense purple
 color(14, 37, 110), // dark blue
 ];
+let votesPalette = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // initialize votes for each color in the palette
+let dominantColor; // variable to hold the dominant color after comparison
+
 
 function drawGrid () {
 //TEGN GRID 
@@ -54,6 +57,7 @@ objectCenterPoint = video.get(objectCenterX, objectCenterY); // punktet i midten
 //find out the column and row of the grid where the object is located
 objectColumn = floor(objectCenterX/gridSize); //kolonne i grid
 objectRow = floor(objectCenterY/gridSize); //række i grid
+paletteVotes = new Array(comparisonPalette.length).fill(0); // Nulstil stemmer for dette objekt (1 nul pr. farve i comparisonPalette)
 
 //løb hen over farven for hver 10ende pixel i gridet og find gennemsnitsfarven for objektet
 for(let x = object.x; x < object.x + object.width; x += gridSize) {
@@ -69,6 +73,13 @@ for(let x = object.x; x < object.x + object.width; x += gridSize) {
 if (pixelCounter > 0) {
   objectColorAverage = color(colorTotalR / pixelCounter, colorTotalG / pixelCounter, colorTotalB / pixelCounter);
 }
+}
+
+function colorDistance(c1, c2) {
+  let rDifference = red(c1) - red(c2);
+  let gDifference = green(c1) - green(c2);
+  let bDifference = blue(c1) - blue(c2);
+  let totalColorDifference = sqrt(rDifference * rDifference + gDifference * gDifference + bDifference * bDifference); // tager summen af forskellen mellem de 3 farver og finder kvadratroden af summen
 }
 
 function drawObjectColor () {
