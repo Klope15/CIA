@@ -1,8 +1,8 @@
 // Live weather dashboard for Benches using Open-Meteo API
 let pillows = [
   { name: "Grønningen", lat: 55.66027925893464, lon: 12.58798331762176 },
-  { name: "BenchAarhus", lat: 56.1629, lon: 10.2039 },
-  { name: "BenchOdensen", lat: 55.4038, lon: 10.4024 },
+  { name: "Fields", lat: 56.1629, lon: 10.2039 },
+  { name: "Busstop", lat: 55.641975834404555, lon: 12.590878594965387 },
   { name: "BenchØsterSø", lat: 56, lon: 4 },
 ];
 
