@@ -65,10 +65,10 @@ function tegnPunkt1() {
 function klikPunkt1(musX, musY) {
   let pos = kort.latLngToContainerPoint([punkt1_lat, punkt1_lon]);
   let afstand = dist(musX, musY, pos.x, pos.y);
-  windSound.play();
 
   if (afstand < punkt1_storrelse / 2) {
     valgt = 1;
+    windSound.play();
   }
 }
 
@@ -219,6 +219,10 @@ function setup() {
   hentBilledePunkt1();
   hentBilledePunkt2();
   hentBilledePunkt3();
+}
+
+function preload(){
+  windSound = loadSound("Sounds/Wind.wav");
 }
 
 
