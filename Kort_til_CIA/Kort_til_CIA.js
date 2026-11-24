@@ -55,11 +55,20 @@ function tegnPunkt1() {
     rect(pos.x, pos.y, punkt1_storrelse, punkt1_storrelse);
   }
 
-  // Vis tekstboksen, hvis punkt 1 er valgt
+  // Vis tekstboksen, hvis punkt 1 er valgt og spil lyden
   if (valgt == 1) {
     tegnInfoboks(punkt1_navn, punkt1_tekst, pos.x, pos.y);
-    if (!windSound.isPlaying()) {
-      windSound.play();
+    
+    if (!windSound.isPlaying()) { // kun spil lyd knyttet til stedet
+      windSound.loop();
+    }
+
+    if (busSound.isPlaying()) {
+      busSound.stop();
+    }
+
+    if (shoppingSound.isPlaying()) {
+      shoppingSound.stop();
     }
   }
 }
@@ -114,6 +123,18 @@ function tegnPunkt2() {
 
   if (valgt == 2) {
     tegnInfoboks(punkt2_navn, punkt2_tekst, pos.x, pos.y);
+
+    if (!windSound.isPlaying()) {
+      windSound.loop();
+    }
+
+    if (busSound.isPlaying()) {
+      busSound.stop();
+  }
+
+  if (!shoppingSound.isPlaying()) {
+    shoppingSound.loop();
+}
   }
 }
 
@@ -167,6 +188,18 @@ function tegnPunkt3() {
 
   if (valgt == 3) {
     tegnInfoboks(punkt3_navn, punkt3_tekst, pos.x, pos.y);
+
+    if (!windSound.isPlaying()) {
+      windSound.loop();
+    }
+
+    if (!busSound.isPlaying()) {
+      busSound.loop();
+  }
+
+  if (shoppingSound.isPlaying()) {
+    shoppingSound.stop();
+}
   }
 }
 
@@ -221,10 +254,14 @@ function setup() {
   hentBilledePunkt1();
   hentBilledePunkt2();
   hentBilledePunkt3();
+
+  loadWeatherData();   // hent vejret for de tre punkter
 }
 
 function preload(){
   windSound = loadSound("Sounds/Wind.wav");
+  busSound = loadSound("Sounds/busstop.wav");
+  shoppingSound = loadSound("Sounds/shopping center.wav");
 }
 
 
@@ -238,6 +275,9 @@ function draw() {
   tegnPunkt1();
   tegnPunkt2();
   tegnPunkt3();
+
+  setAmplitude();
+
 }
 
 

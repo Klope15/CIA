@@ -9,13 +9,17 @@ let pillows = [
 let weatherData = [];
 let loaded = false;
 var windSound;
+var busSound;
+var shoppingSound;
 var amp;
 
 function preload(){
   windSound = loadSound("Sounds/Wind.wav");
+  busSound = loadSound("Sounds/Bus.wav");
+  shoppingSound = loadSound("Sounds/Shopping.wav");
 }
 
-function loadData() {
+function loadWeatherData() {
 
   // Fetch current weather for each city
   for (let i = 0; i < pillows.length; i++) {
@@ -52,9 +56,9 @@ function loadData() {
 
 
 function setAmplitude(){
-  let x = map(weatherData[3].wind,0,10,0,1);
+  if (!loaded || !weatherData[valgt-1]) return; // Ensure weather data is loaded before proceeding
+  let x = map(weatherData[valgt-1].wind,0,10,0,1);
   x = constrain(x,0,1);
   windSound.amp(x);
-  console.log("Amplitude:", windSound.amp());
 }
 
