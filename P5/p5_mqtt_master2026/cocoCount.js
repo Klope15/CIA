@@ -25,6 +25,7 @@ function cocoDraw() {
     drawResult(detections[i]); //visualize what was detected
     findObjectColor(detections[i]); //find farven på objektet
     drawObjectColor (); //tegn objektets farve 
+    storeEnvironmentColors(); //gem farven i environmentColors arrayet
     
     if (detections[i].label === itemToCount) // if the label fits what we are looking for..
     {

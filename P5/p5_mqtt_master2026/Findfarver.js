@@ -18,9 +18,6 @@ let paletteVotes = [];
 let dominantColor = 0;
 let comparisonPalette =[]; // array to hold the colors we want to compare against
 
-//variables for storing dominatcolors 
-let environmentColors = []; //to hold the dominant colors of the objects in the environment
-
 function drawGrid () {
 //TEGN GRID 
 
@@ -118,7 +115,7 @@ for (let i = 0; i < paletteVotes.length; i++) { //Går igennem alle stemmerne i 
   }
 }
 dominantColor = comparisonPalette[winningPaletteIndex]; //Gemmer den farve i comparisonPalette, der har fået flest stemmer som dominantColor
-environmentColors.push(dominantColor); //Gemmer dominantColor i environmentColors arrayet, så vi kan bruge den senere til at finde ud af, hvilke farver der er dominerende i miljøet
+return dominantColor; // Return the dominant color for this object
 }
 
 /*if (pixelCounter > 0) {
