@@ -42,6 +42,10 @@ const char pass[] = "FGeRiGzg";
   // millis variabel
   unsigned long previousMillis = 0;
 
+  // variables for blending coloring
+  unsigned long blendStartTime = 0;
+  bool blendStarted = false;
+
   CRGB leds[NUM_LEDS]; 
 
   // ____VARIABLES FROM PILLOWLIGHTPATTERN____
