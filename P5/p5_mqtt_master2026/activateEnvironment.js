@@ -1,3 +1,5 @@
+let activeEnvironment = null;
+
 function chooseEnvironment (){
   /*if (vi trykker på fields tegningen) {
     activateEnvironment(Fields);
@@ -21,8 +23,8 @@ function activateEnvironment(environmentName) {
     detections = []; // Clear the detections array for the new environment
     //add envirorment colors 
     resetEnvironmentColors(); // Reset the environment colors for the new environment
-    // add envirorment sound og aktiver given hæjtaler 
-    // add aktivering af givene kamera 
+    // envirormentsound(environmentName) add envirorment sound og aktiver given højtaler 
+    // envirormentcamera(environmentName) add aktivering af givene kamera 
     
     console.log(environmentName + " is active.");
   

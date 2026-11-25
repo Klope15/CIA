@@ -1,6 +1,6 @@
 let maxEnvironmentColors = 12; // maximum number of colors to store in environmentColors array
 let environmentColors = []; //to hold the dominant colors of the objects in the environment
-let envirmentColorsSent = false; // flag to indicate if environment colors have been sent
+let environmentColorsSent = false; // flag to indicate if environment colors have been sent
 
 function storeEnvironmentColors() {
     
@@ -10,11 +10,12 @@ if (environmentColors.length < maxEnvironmentColors) { //Begrænser antallet af 
 }
 function resetEnvironmentColors() {
   environmentColors = []; // Clear the environmentColors array for the new environment
-  envirmentColorsSent = false; // Reset the flag to indicate that environment colors have not been sent yet
+  environmentColorsSent = false; // Reset the flag to indicate that environment colors have not been sent yet
 }
 function sendEnvironmentColors() {
   if (environmentColors.length === maxEnvironmentColors && !environmentColorsSent) {
-  environmentColorsSent = true;
+  environmentColorsSent= true;
+  console.log("Sender 12 farver:", environmentColors);
   sender(environmentColors);
 }
 }

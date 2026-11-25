@@ -1,5 +1,5 @@
 function cocoSetup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(640, 480);
   textSize(24);
   setupComparisonPalette();
     var constraints = {
@@ -16,7 +16,7 @@ function cocoSetup() {
 }
 
 function cocoDraw() {
-  image(video, 0, 0, windowWidth, windowHeight);
+  image(video, 0, 0, 640, 480);
   
   itemCount=0;  //reset counting 
   
@@ -57,6 +57,9 @@ function onDetected(error, results) {
 }
 
 function detect() {
+  if (!video || !video.elt || video.elt.readyState < 2) { //Spring detektion over, indtil kamera-streamet er klar med billeddata.
+    return;
+  }
   detector.detect(video, onDetected);
 }
 
