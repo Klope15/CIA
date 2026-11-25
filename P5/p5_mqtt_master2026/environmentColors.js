@@ -1,7 +1,5 @@
 let maxEnvironmentColors = 12; // maximum number of colors to store in environmentColors array
 
-function 
-
 function storeEnvironmentColors() {
 
     dominantColor = comparisonPalette[winningPaletteIndex]; //Gemmer den farve i comparisonPalette, der har fået flest stemmer som dominantColor
