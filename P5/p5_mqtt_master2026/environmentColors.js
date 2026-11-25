@@ -8,8 +8,13 @@ if (environmentColors.length < maxEnvironmentColors) { //Begrænser antallet af 
   environmentColors.push(dominantColor); //Gemmer dominantColor i environmentColors arrayet, så vi kan bruge den senere til at finde ud af, hvilke farver der er dominerende i miljøet
 }
 }
-
 function resetEnvironmentColors() {
   environmentColors = []; // Clear the environmentColors array for the new environment
   envirmentColorsSent = false; // Reset the flag to indicate that environment colors have not been sent yet
+}
+function sendEnvironmentColors() {
+  if (environmentColors.length === maxEnvironmentColors && !environmentColorsSent) {
+  environmentColorsSent = true;
+  sender(environmentColors);
+}
 }
