@@ -41,7 +41,7 @@ void updateLED() {
 
   fill_solid(leds, NUM_LEDS, CRGB::Black);   // sluk alt først
   // hvilken farve og hvilken position på strippen
-  if (Red > 0)   fill_solid(&leds[0], 3, blend(CRGB::Red, mix, amount));
-  if (Blue > 0)  fill_solid(&leds[3], 3, blend(CRGB::Blue, mix, amount));
+  if (Red > 0)   fill_solid(&leds[0], 3, blend(CRGB(255, 0, 0), mix, amount));
+  if (Blue > 0)  fill_solid(&leds[3], 3, blend(CRGB(0, 0, 255), mix, amount));
   if (Green > 0) fill_solid(&leds[6], 4, blend(CRGB(0, 255, 0), mix, amount));
 }

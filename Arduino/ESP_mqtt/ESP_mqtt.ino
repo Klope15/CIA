@@ -22,7 +22,7 @@ JsonDocument recieverBuffer;
 // ------------------------------------
 
 // ########### WIFI CONFIG ###########
-const char ssid[] = "Sensors";
+const char ssid[] = "sensors";
 const char pass[] = "FGeRiGzg";
 
   // ########### MQTT CONFIG ###########
