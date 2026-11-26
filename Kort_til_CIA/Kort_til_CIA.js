@@ -8,6 +8,11 @@
 let kort;        // selve kortet
 let valgt = 0;   // hvilket punkt er der klikket på? 0 = ingen, 1, 2 eller 3
 
+// --------------------------------------------
+// MillisUpdate
+// --------------------------------------------
+const WEATHER_REFRESH_INTERVAL = 10000; // 10 sekunder
+let lastWeatherUpdate = 0;
 
 // --------------------------------------------
 //  PUNKT 1
@@ -256,6 +261,7 @@ function setup() {
   hentBilledePunkt3();
 
   loadWeatherData();   // hent vejret for de tre punkter
+  lastWeatherUpdate = millis();
 }
 
 function preload(){
@@ -278,8 +284,12 @@ function draw() {
 
   setAmplitude();
 
+  if (millis() - lastWeatherUpdate >= WEATHER_REFRESH_INTERVAL) { //vi loader vejret igen hvert 30. minut
+  loadWeatherData();
+  lastWeatherUpdate = millis();
 }
 
+}
 
 // --------------------------------------------
 //  KLIK PÅ KORTET

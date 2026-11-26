@@ -7,6 +7,7 @@ let pillows = [
 ];
 
 let weatherData = [];
+
 let loaded = false;
 var windSound;
 var busSound;
@@ -30,24 +31,26 @@ function loadWeatherData() {
       "&wind_speed_unit=ms"+
       "&daily=temperature_2m_max,temperature_2m_min" +
       "&timezone=Europe/Copenhagen&forecast_days=7";
+      "&models=met_nordic"
 
     loadJSON(url,
       function(data) {
-        weatherData.push({
-          name: pillows[weatherData.length].name,
+           weatherData[i] = {
+          name: pillows[i].name,
           temp: data.current.temperature_2m,
           wind: data.current.wind_speed_10m,
           humidity: data.current.relative_humidity_2m,
           maxTemps: data.daily.temperature_2m_max,
           minTemps: data.daily.temperature_2m_min,
           days: data.daily.time
-        });
+        };
 
         if (weatherData.length == pillows.length) {
           loaded = true;
             for (let i = 0; i < weatherData.length; i++) {
             console.log(weatherData[i].name, weatherData[i].wind);
           }
+         console.log("objekter i vejrdata: ",weatherData.length);
         }
       }
     );
