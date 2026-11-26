@@ -1,4 +1,4 @@
-int lastSent = -1;   // husker hvad vi sendte sidst, så vi kun sender når noget ændrer sig (-1 sikrer at første værdi altid sendes)
+int lastSent = -1;   // husker hvad vi sendte sidst, så vi kun sender når noget ændrer sig (-1 sikrer at første værdi altid sendes) kan være alle tal undtagen 0 og 255.
 int lastCount = 0;   // husker hvor mange ESP'er der var tændt sidste gang, starter på 0 fordi ingen sidder der når programmet starter
 
 void pultLightSetup() {
