@@ -22,7 +22,7 @@ void personOnPillow() {
 }
 
 void updateLED() {
-  int count = (Red > 0) + (Blue > 0) + (Green > 0);   // antal tændte ESP'er
+  int count = (Red > 0) + (Yellow > 0) + (Green > 0);   // antal tændte ESP'er
 
   // start timeren forfra når antallet ændrer sig, fx nogen sætter sig eller rejser sig op.
   if (count != lastCount) {
@@ -37,11 +37,21 @@ void updateLED() {
     amount = constrain(amount, 0, 255); // sikrer sig at amount altid er indenfor 0 og 255.
   }
 
-  CRGB mix = CRGB(Red, Green, Blue);   // her mixer det fælles farven
+  // vores 3 farver, rød, grøn og gul
+  CRGB red    = CRGB(255, 0, 0);
+  CRGB yellow = CRGB(255, 150, 0);
+  CRGB green  = CRGB(0, 255, 0);
 
-  fill_solid(leds, NUM_LEDS, CRGB::Black);   // sluk alt først
+  // vælg blandingsfarven ud fra hvilke ESP'er der er tændt
+  CRGB mix = CRGB::Black;
+  if (Red > 0 && Yellow > 0 && Green > 0) mix = CRGB(255, 255, 255); // alle tre = hvid
+  else if (Red > 0 && Yellow > 0)         mix = CRGB(255, 50, 0);    // rød + gul = orange
+  else if (Red > 0 && Green > 0)          mix = CRGB(170, 255, 0);   // rød + grøn = grøngul
+  else if (Yellow > 0 && Green > 0)       mix = CRGB(0, 255, 100);   // gul + grøn = mintgrøn
+
+  fill_solid(leds, NUM_LEDS, CRGB::Black);   // sluk alle lys på strippen først, altså gør lysene sort
   // hvilken farve og hvilken position på strippen
-  if (Red > 0)   fill_solid(&leds[0], 3, blend(CRGB(255, 0, 0), mix, amount));
-  if (Blue > 0)  fill_solid(&leds[3], 3, blend(CRGB(0, 0, 255), mix, amount));
-  if (Green > 0) fill_solid(&leds[6], 4, blend(CRGB(0, 255, 0), mix, amount));
+  if (Red > 0)    fill_solid(&leds[0], 3, blend(red, mix, amount));
+  if (Yellow > 0) fill_solid(&leds[3], 3, blend(yellow, mix, amount));
+  if (Green > 0)  fill_solid(&leds[6], 4, blend(green, mix, amount));
 }

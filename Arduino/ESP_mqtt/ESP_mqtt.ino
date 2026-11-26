@@ -27,7 +27,7 @@ const char pass[] = "FGeRiGzg";
 
   // ########### MQTT CONFIG ###########
   const String topic = "Bænk";
-  const String senderID = "ESP1"; // Husk at ændre til den ESP du bruger!
+  const String senderID = "ESP3"; // Husk at ændre til den ESP du bruger!
 
   // ____VARIABLES FROM PULTLIGHT____
 
@@ -37,7 +37,7 @@ const char pass[] = "FGeRiGzg";
   //farvekoder vi sender med mqtt
   int Red = 0;
   int Green = 0;
-  int Blue = 0;
+  int Yellow = 0;
 
   // millis variabel
   unsigned long previousMillis = 0;
