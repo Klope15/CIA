@@ -18,9 +18,5 @@ function setup() {
 
 function draw() {
  cocoDraw();
- //drawGrid (); //tegn gider
- sendEnvironmentColors(); //sender environmentColors arrayet, når der er 12 farver i arrayet
- 
 } 
-
 
