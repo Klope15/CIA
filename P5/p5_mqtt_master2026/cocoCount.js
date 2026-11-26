@@ -12,38 +12,33 @@ function cocoSetup() {
   
   video.size(640, 480);
   video.hide();
-
 }
 
 function cocoDraw() {
   image(video, 0, 0, windowWidth, windowHeight);
-  
+  findEnvironmentColors();  //Function on findfarver.js, that finds and stores the 12 colors in detectedColors array
+  drawDetectedColors();     //Function on findfarver.js, that draws the detected colors in the top 
+  storeEnvironmentColors(); //Function on environmentColors.js, that stores the 12 colors in environmentColors array
+  sendEnvironmentColors();  //Function on environmentColors.js, that sends the 12 colors to the arduino, if they have not been sent yet
   itemCount=0;  //reset counting 
-  
+
   for (let i = 0; i < detections.length; i++) 
   {
     drawResult(detections[i]); //visualize what was detected
-    findObjectColor(detections[i]); //find farven på objektet
-    drawObjectColor (); //tegn objektets farve 
-    storeEnvironmentColors(); //gem farven i environmentColors arrayet
-    
     if (detections[i].label === itemToCount) // if the label fits what we are looking for..
     {
       itemCount=itemCount+1; // ...then add 1 to counter
     }
-  
 }
   
-  if(itemCount != previousCount)
-  {
+  if(itemCount != previousCount){
     previousCount =itemCount;
     console.log(itemCount);
     sender(itemCount);
   }
+
   text(itemCount,20,20);
-
   detect(); //do detection
-
 } 
 
 // Callback function called when objects are detected

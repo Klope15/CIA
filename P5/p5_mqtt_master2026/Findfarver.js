@@ -1,35 +1,5 @@
-//variables for the grid
-let gridSize = 100; 
-//variables of the object in the grid
-let objectCenterX; 
-let objectCenterY;
-let objectCenterPoint
-let objectColumn; 
-let objectRow; 
-//variable to hold the total color of the object in the grid
-let colorTotalR = 0; // for at holde den generelle røde farve 
-let colorTotalG = 0; // for at holde den generelle grønne farve
-let colorTotalB = 0; // for at holde den generelle blå farve
-let pixelCounter = 0; // for at holde styr på hvor mange pixels der er blevet talt med i gennemsnittet(+10 pix for hver omgang i loopet)
-let objectColorAverage; // for at holde den gennemsnitlige farve af objektet i gridet
-
-//variables for color comparison and voting
-let paletteVotes = [];
-let dominantColor = 0;
-let comparisonPalette =[]; // array to hold the colors we want to compare against
-
-function drawGrid () {
-//TEGN GRID 
-
-for(let x=0; x<windowWidth; x+=gridSize) { //rækker vandret 
-  for(let y=0; y<windowHeight; y+=gridSize) { //rækker lodret 
-    stroke(255);
-    strokeWeight(1);
-    noFill();
-    rect(x,y,gridSize,gridSize);
-  }
-}
-}
+let comparisonPalette =[]; // array to hold the colors we want to compare against (the colors we want to show in the leds)
+let detectedColors = []; // array to hold the colors detected in the environment
 
 function setupComparisonPalette() {
   comparisonPalette = [
@@ -61,74 +31,49 @@ function colorDistance(c1, c2) { //funktion til at finde afstanden mellem to far
   return totalColorDifference;
 }
 
-function findObjectColor(object) {
-  //find out the point in the middle of the object 
-objectCenterX = object.x + object.width/2;
-objectCenterY = object.y + object.height/2;
-objectCenterPoint = video.get(objectCenterX, objectCenterY); // punktet i midten af objektet (UNDERSØG OM VI SKAL BRUGE DENNE TIL NOGET)
-//find out the column and row of the grid where the object is located
-objectColumn = floor(objectCenterX/gridSize); //kolonne i grid
-objectRow = floor(objectCenterY/gridSize); //række i grid
-paletteVotes = new Array(comparisonPalette.length).fill(0); // Nulstil stemmer for dette objekt (1 nul pr. farve i comparisonPalette)
-let sampleStep = 15; // hvor tæt vi måler pixels inde i objektet
-
-
-/* DET GAMLE LOOP MED GENNEMSNITSFARVEN 
-//løb hen over farven for hver 10ende pixel i gridet og find gennemsnitsfarven for objektet
-for(let x = object.x; x < object.x + object.width; x += gridSize) {
-  for(let y = object.y; y < object.y + object.height; y += gridSize) {
-    let pixelColor = video.get(x, y);
-    colorTotalR += red(pixelColor);
-    colorTotalG += green(pixelColor);
-    colorTotalB += blue(pixelColor);
-    pixelCounter++;
-    
+function findEnvironmentColors() {
+ //tjekker om vi allerede har fundet 12 farver, hvis ja, så gør vi ikke mere
+  if (detectedColors.length === maxEnvironmentColors) {
+    return; 
   }
-}
-*/
-//løb hen over farven for hver 10ende pixel i gridet og find gennemsnitsfarven for objektet
-for(let x = object.x; x < object.x + object.width; x += sampleStep) {
-  for(let y = object.y; y < object.y + object.height; y += sampleStep) {
-    let currentPixelColor = video.get(x, y);
 
-    let shortestDistance = Infinity; //sætter den korteste afstand til uendelig, så vi kan finde den korteste afstand i loopet
-    let closestPalette = 0;
+  // lader videoen loade og giver den 10 sekunder til at starte op, før vi begynder at finde farver
+  if (millis() < 10000) {
+    return; 
+  }
+  detectedColors = []; // Nulstil arrayet
 
-    for (let i = 0; i < comparisonPalette.length; i++) { //kører igennem alle farver i comparisonPalette
-      let distanceToPaletteColor = colorDistance(currentPixelColor, comparisonPalette[i]); //Bruger vores colorDistance funktion til at finde afstanden mellem currntPixelColor og farven i comparisonPalette og gemmer værdien i en variabel
-      if (distanceToPaletteColor < shortestDistance) { //Hvis farven er mindre end den korteste afstand gemmes denne farve som den korteste afstand
-        shortestDistance = distanceToPaletteColor;
-        closestPalette = i; //Sætter closestPalette til at pege pp den plads med kortest afstand, så vi ved hvilken plads i paletteVotes der skal have +1 stemme
+  //Kør 12 gange for at få 12 tilfældige punkter
+  for (let i = 0; i < 12; i++) { //køre igennem 12 gange, så vi får 12 forskellige punkter at tage farver fra
+    let sampleX = floor(random(video.width)); //tager en random x-værdi
+    let sampleY = floor(random(video.height)); //tager en random y-værdi
+    
+    //finder farven på de valgte 12 punkter
+    let currentPixelColor = video.get(sampleX, sampleY);
+
+    let shortestDistance = Infinity; //sætter den til uendelig stor, så vi kan finde den korteste afstand til en farve i comparisonPalette
+    let closestPaletteIndex = 0; 
+
+    //sammenligner den fundet farve med de farver vi har i comparisonPalette, for at finde den farve der er tættest på. Gøres for alle 12 punkter, så vi får 12 farver der er tættest på de farver vi har i comparisonPalette
+    for (let j = 0; j < comparisonPalette.length; j++) {
+      let distanceToPaletteColor = colorDistance(currentPixelColor, comparisonPalette[j]); //bruger vores colorDistance funktion til at finde afstanden mellem den fundet farve og de farver vi har i comparisonPalette
+      if (distanceToPaletteColor < shortestDistance) { //hvis afstanden er kortere end den korteste afstand vi har fundet indtil nu, så opdaterer vi den korteste afstand og den tætteste farve
+        shortestDistance = distanceToPaletteColor; //sætter shortestDistance til den nye korteste afstand
+        closestPaletteIndex = j; //gemmer hvilken plads i comparisonPalette den tætteste farve er på, så vi  senere kan  gemme den i detectedColors 
       }
     }
-    paletteVotes[closestPalette]++; //Når vi har fundet den farve i comparisonPalette, der er tættest på currentPixelColor, øger vi stemmerne for den farve med 1
+    
+    // tilføjer den tætteste farve i comparisonPalette til detectedColors
+    detectedColors.push(comparisonPalette[closestPaletteIndex]);
   }
 }
-// Find den farve i paletten, der har fået flest stemmer
-let highestVoteCount = -1; 
-let winningPaletteIndex = 0; 
 
-for (let i = 0; i < paletteVotes.length; i++) { //Går igennem alle stemmerne i paletteVotes og finder den farve, der har fået flest stemmer
-  if (paletteVotes[i] > highestVoteCount) { //Hvis stemmerne for farven er højere end den højeste stemme, gemmes denne farve som den højeste stemme
-    highestVoteCount = paletteVotes[i];
-    winningPaletteIndex = i; //sætter winningPaletteIndex til at pege på den farve i comparisonPalette, der har fået flest stemmer, så vi ved hvilken farve, der skal gemmes som dominantColor
+function drawDetectedColors() { //får at vi kan se hvilke farver der er gemt, tegner vi 12 firkanter i toppen med farverne fra arrayet.
+  let boxWidth = width / 12; 
+  for (let i = 0; i < detectedColors.length; i++) {
+    fill(detectedColors[i]);
+    stroke(0);
+    strokeWeight(1);
+    rect(i * boxWidth, 0, boxWidth, 40); 
   }
 }
-dominantColor = comparisonPalette[winningPaletteIndex]; //Gemmer den farve i comparisonPalette, der har fået flest stemmer som dominantColor
-return dominantColor; // Return the dominant color for this object
-}
-
-/*if (pixelCounter > 0) {
-  objectColorAverage = color(colorTotalR / pixelCounter, colorTotalG / pixelCounter, colorTotalB / pixelCounter);
-}
-}
-*/
-
-
-function drawObjectColor () {
-//draw the color of the object 
-fill(dominantColor); 
-stroke(0);
-circle(objectCenterX, objectCenterY, 20);
-}
-

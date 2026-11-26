@@ -21,7 +21,7 @@ function activateEnvironment(environmentName) {
     detections = []; // Clear the detections array for the new environment
     //add envirorment colors 
     resetEnvironmentColors(); // Reset the environment colors for the new environment
-    // add envirorment sound og aktiver given hæjtaler 
+    // add envirorment sound og aktiver given højtaler 
     // add aktivering af givene kamera 
     
     console.log(environmentName + " is active.");
