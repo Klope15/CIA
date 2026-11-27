@@ -42,6 +42,11 @@ let itemCount=0;
 let previousCount=0;
 let itemToCount="person"; //you can change this into any of the 80 object-types
 
+//ESP Active
+let esp1Active = 0;
+let esp2Active = 0;
+let esp3Active = 0;
+
 // Henter billedet til punkt 1 (hvis du har skrevet et filnavn)
 function hentBilledePunkt1() {
   if (punkt1_billedfil != "") {
@@ -56,9 +61,10 @@ function tegnPunkt1() {
   // lat/lon bliver lavet om til x og y på skærmen
   let pos = kort.latLngToContainerPoint([punkt1_lat, punkt1_lon]);
   
-  //add this when we have mqtt
-  //punkt1_storrelse = 115 + punkt1_storrelse * sin(thetha)*0.5;
-  //thetha += 0.05;
+  if (esp1Active == 1) {
+  punkt1_storrelse = 115 + punkt1_storrelse * sin(thetha)*0.5;
+  thetha += 0.05;
+  }
   
 
   if (punkt1_billede) {
@@ -129,6 +135,11 @@ function hentBilledePunkt2() {
 function tegnPunkt2() {
   let pos = kort.latLngToContainerPoint([punkt2_lat, punkt2_lon]);
 
+   if (esp2Active == 1) {
+  punkt2_storrelse = 115 + punkt2_storrelse * sin(thetha)*0.5;
+  thetha += 0.05;
+  }
+
   if (punkt2_billede) {
     image(punkt2_billede, pos.x, pos.y, punkt2_storrelse + 100, punkt2_storrelse);
   } else {
@@ -193,6 +204,11 @@ function hentBilledePunkt3() {
 // Tegner punkt 3 på kortet
 function tegnPunkt3() {
   let pos = kort.latLngToContainerPoint([punkt3_lat, punkt3_lon]);
+
+   if (esp3Active == 1) {
+  punkt3_storrelse = 115 + punkt3_storrelse * sin(thetha)*0.5;
+  thetha += 0.05;
+  }
 
   if (punkt3_billede) {
     image(punkt3_billede, pos.x, pos.y, punkt3_storrelse + 100, punkt3_storrelse);
