@@ -28,7 +28,19 @@ let punkt1_storrelse = 150;         // størrelse i pixels
 let punkt1_billedfil = "Images/Grønningen.png";         // fx "ikon1.png". Tom = brug cirkel
 
 let punkt1_billede;                // her gemmes billedet, når det er hentet
-let thetha = 0;                          // bruges til at rotere billedet
+let thetha = 0;                         
+
+const topic = "Bænk"; //for sending messages
+const afsenderID = "Camera1";
+
+// variables needed for object detection
+let video; 
+let detector; 
+let detectorReady = false;
+let detections = []; 
+let itemCount=0;
+let previousCount=0;
+let itemToCount="person"; //you can change this into any of the 80 object-types
 
 // Henter billedet til punkt 1 (hvis du har skrevet et filnavn)
 function hentBilledePunkt1() {
@@ -234,6 +246,8 @@ function setup() {
   canvas.parent("holder");   // læg canvasset oven på kortet
   imageMode(CENTER);         // billeder tegnes ud fra deres midte
 
+  cocoSetup(); 
+
 // --------------------------------------------
 // Lav kortet
 // --------------------------------------------
@@ -276,8 +290,10 @@ function preload(){
 // --------------------------------------------
 
 function draw() {
-  clear();   // gør canvasset gennemsigtigt, så man kan se kortet
+  cocoDraw();  //kører object detection og sender data til arduino
 
+  clear();   // gør canvasset gennemsigtigt, så man kan se kortet
+  
   tegnPunkt1();
   tegnPunkt2();
   tegnPunkt3();
@@ -336,5 +352,8 @@ function tegnInfoboks(navn, tekst, x, y) {
   text(tekst, boksX + 12, boksY + 56);
 }
 
+function mousePressed() { 
+fullscreen(true);
+}
 
 //hej
