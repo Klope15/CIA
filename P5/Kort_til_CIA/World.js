@@ -42,10 +42,13 @@ let itemCount=0;
 let previousCount=0;
 let itemToCount="person"; //you can change this into any of the 80 object-types
 
-//ESP Active
+// Which pillow has a person on it
 let esp1Active = 0;
 let esp2Active = 0;
 let esp3Active = 0;
+
+//which pillow is clicked on
+let activePillow = "none";
 
 // Henter billedet til punkt 1 (hvis du har skrevet et filnavn)
 function hentBilledePunkt1() {
@@ -81,6 +84,7 @@ function tegnPunkt1() {
   // Vis tekstboksen, hvis punkt 1 er valgt og spil lyden
   if (valgt == 1) {
     tegnInfoboks(punkt1_navn, punkt1_tekst, pos.x, pos.y);
+    PillowClicked("Grønningen");
     
     if (!windSound.isPlaying()) { // kun spil lyd knyttet til stedet
       windSound.loop();
@@ -151,7 +155,7 @@ function tegnPunkt2() {
 
   if (valgt == 2) {
     tegnInfoboks(punkt2_navn, punkt2_tekst, pos.x, pos.y);
-
+    PillowClicked("Fields");  
     if (!windSound.isPlaying()) {
       windSound.loop();
     }
@@ -221,6 +225,7 @@ function tegnPunkt3() {
 
   if (valgt == 3) {
     tegnInfoboks(punkt3_navn, punkt3_tekst, pos.x, pos.y);
+    PillowClicked("Busstop"); 
 
     if (!windSound.isPlaying()) {
       windSound.loop();
@@ -372,4 +377,9 @@ function mousePressed() {
 fullscreen(true);
 }
 
-//hej
+function PillowClicked(valgtpude){
+ if(activePillow != valgtpude) {
+  activePillow = valgtpude;
+  sender(activePillow);
+ }
+}
