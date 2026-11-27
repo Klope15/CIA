@@ -3,7 +3,9 @@ function preload() {
   detector = ml5.objectDetector('cocossd');
 }
 const topic = "Bænk";
-const afsenderID = "Camera1";
+//const afsenderID = "Camera1";
+const afsenderID = "Camera2";
+//const afsenderID = "Camera3";
 let video; 
 let detector; 
 let detections = []; 
