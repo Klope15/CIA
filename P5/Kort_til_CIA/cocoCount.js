@@ -1,8 +1,12 @@
 function cocoSetup() {
-  createCanvas(640, 480);
   textSize(24);
   setupComparisonPalette();
-    var constraints = {
+ 
+  detector = ml5.objectDetector("cocossd", () => { // only start detection when the model is ready
+    detectorReady = true;
+  });
+
+  var constraints = {
     video: {
       facingMode: "environment"
     },
@@ -52,7 +56,7 @@ function onDetected(error, results) {
 }
 
 function detect() {
-  if (!video || !video.elt || video.elt.readyState < 2) { //Spring detektion over, indtil kamera-streamet er klar med billeddata.
+  if (!detectorReady || !video || !video.elt || video.elt.readyState < 2) { //Spring detektion over, indtil modellen og kamera-streamet er klar.
     return;
   }
   detector.detect(video, onDetected);
