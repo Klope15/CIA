@@ -3,7 +3,7 @@ void pillowLightPatternSetup() {
 }
 
 void pillowLightPatternloop() {
-  Serial.println(peopleCount);
+  //Serial.println(peopleCount);
 
   speed = map(peopleCount, 1, 10, 500, 5);
 

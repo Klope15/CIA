@@ -4,22 +4,22 @@ let detectedColors = []; // array to hold the colors detected in the environment
 function setupComparisonPalette() {
   comparisonPalette = [
 // red colors
-color(245, 66, 144), // intense pink
-color(252, 131, 61), // intense orange
-color(245, 66, 66), // intense red
-color (235, 103, 101), // light red 
+[245, 66, 144], // intense pink
+[252, 131, 61], // intense orange
+[245, 66, 66], // intense red
+[235, 103, 101], // light red 
 
 //green colors 
-color(66, 245, 135), // intense green
-color(78, 150, 74), // dark green
-color(245, 245, 66), // intense yellow
-color(237, 232, 154), // light yellow
+[66, 245, 135], // intense green
+[78, 150, 74], // dark green
+[245, 245, 66], // intense yellow
+[237, 232, 154], // light yellow
 
 //blue colors 
-color(66, 135, 245), // intense blue 
-color(134, 219, 252), // clear light blue 
-color(224, 121, 237), // intense purple
-color(14, 37, 110) // dark blue
+[66, 135, 245], // intense blue 
+[134, 219, 252], // clear light blue 
+[224, 121, 237], // intense purple
+[14, 37, 110] // dark blue
   ];
 }
 

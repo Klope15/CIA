@@ -27,7 +27,7 @@ const char pass[] = "FGeRiGzg";
 
   // ########### MQTT CONFIG ###########
   const String topic = "Bænk";
-  const String senderID = "Esp4"; // Husk at ændre til den ESP du bruger!
+  const String senderID = "ESP1"; // Husk at ændre til den ESP du bruger!
 
   // ____VARIABLES FROM PULTLIGHT____
 
@@ -41,6 +41,10 @@ const char pass[] = "FGeRiGzg";
 
   // millis variabel
   unsigned long previousMillis = 0;
+
+  // variables for blending coloring
+  unsigned long blendStartTime = 0;
+  bool blendStarted = false;
 
   CRGB leds[NUM_LEDS]; 
 
@@ -73,8 +77,7 @@ const char pass[] = "FGeRiGzg";
     pillowLightPatternSetup();
   }
 
-  void loop() 
-  {
+  void loop() {
   pultLightloop(); //main loop for the pult 
   pillowLightPatternloop(); // main loop for the light on the pillow 
   FastLED.show();
