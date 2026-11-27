@@ -34,7 +34,7 @@ function cocoDraw() {
       itemCount=itemCount+1; // ...then add 1 to counter
     }
 }
-  
+
   if(itemCount != previousCount){
     previousCount =itemCount;
     console.log(itemCount);
@@ -56,7 +56,7 @@ function onDetected(error, results) {
 }
 
 function detect() {
-  if (!detectorReady || !video || !video.elt || video.elt.readyState < 2) { //Spring detektion over, indtil modellen og kamera-streamet er klar.
+  if (!video || !video.elt || video.elt.readyState < 2) { //Spring detektion over, indtil kamera-streamet er klar med billeddata.
     return;
   }
   detector.detect(video, onDetected);

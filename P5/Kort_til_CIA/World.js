@@ -14,6 +14,9 @@ let valgt = 0;   // hvilket punkt er der klikket på? 0 = ingen, 1, 2 eller 3
 const WEATHER_REFRESH_INTERVAL = 1800000; // every 30 minutes 
 let lastWeatherUpdate = 0;
 
+const PEOPLE_COUNT_REFRESH_INTERVAL = 10000; // every 10 seconds
+let lastPeopleCountUpdate = 0;
+
 // --------------------------------------------
 //  PUNKT 1
 // --------------------------------------------
@@ -31,12 +34,11 @@ let punkt1_billede;                // her gemmes billedet, når det er hentet
 let thetha = 0;                         
 
 const topic = "Bænk"; //for sending messages
-const afsenderID = "Camera1";
+const afsenderID = "kort1";
 
 // variables needed for object detection
 let video; 
 let detector; 
-let detectorReady = false;
 let detections = []; 
 let itemCount=0;
 let previousCount=0;
@@ -84,7 +86,7 @@ function tegnPunkt1() {
   // Vis tekstboksen, hvis punkt 1 er valgt og spil lyden
   if (valgt == 1) {
     tegnInfoboks(punkt1_navn, punkt1_tekst, pos.x, pos.y);
-    PillowClicked("Grønningen");
+    PillowClicked(3);
     
     if (!windSound.isPlaying()) { // kun spil lyd knyttet til stedet
       windSound.loop();
@@ -155,7 +157,7 @@ function tegnPunkt2() {
 
   if (valgt == 2) {
     tegnInfoboks(punkt2_navn, punkt2_tekst, pos.x, pos.y);
-    PillowClicked("Fields");  
+    PillowClicked(1);  
     if (!windSound.isPlaying()) {
       windSound.loop();
     }
@@ -225,7 +227,7 @@ function tegnPunkt3() {
 
   if (valgt == 3) {
     tegnInfoboks(punkt3_navn, punkt3_tekst, pos.x, pos.y);
-    PillowClicked("Busstop"); 
+    PillowClicked(2); 
 
     if (!windSound.isPlaying()) {
       windSound.loop();
@@ -267,7 +269,7 @@ function setup() {
   canvas.parent("holder");   // læg canvasset oven på kortet
   imageMode(CENTER);         // billeder tegnes ud fra deres midte
 
-  cocoSetup(); 
+  //cocoSetup(); 
 
 // --------------------------------------------
 // Lav kortet
@@ -311,7 +313,7 @@ function preload(){
 // --------------------------------------------
 
 function draw() {
-  cocoDraw();  //kører object detection og sender data til arduino
+  //cocoDraw();  //kører object detection og sender data til arduino
 
   clear();   // gør canvasset gennemsigtigt, så man kan se kortet
   
