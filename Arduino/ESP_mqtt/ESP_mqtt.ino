@@ -69,6 +69,8 @@ const char pass[] = "FGeRiGzg";
   CRGB environmentColor_2[18]; // farver for pude 2 med et møster på 18x8 farver 
   CRGB environmentColor_3[18]; // farver for pude 3 med et møster på 18x8 farver 
   bool colorSaved = false;
+  int placering; 
+
 
   // ________NOW FOLLOWS MAIN PROGRAMS______
 
@@ -84,6 +86,16 @@ const char pass[] = "FGeRiGzg";
   void loop() {
   client.loop();
   pultLightloop(); //main loop for the pult 
+  if (placering == fields){
+pillowLightPatternloop(environmentColor_1);
+  }
+   else if (placering == busstopsted){
+pillowLightPatternloop(environmentColor_2);
+  }
+  else if (placering == grønningen){
+pillowLightPatternloop(environmentColor_3);
+  }
+
   pillowLightPatternloop(); // main loop for the light on the pillow 
   FastLED.show();
   //for(int i=0; i<environmentColor.length(); i++){
