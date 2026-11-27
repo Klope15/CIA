@@ -2,7 +2,7 @@ void pillowLightPatternSetup() {
   FastLED.addLeds<NEOPIXEL, pillowLightPatternDATA_PIN>(pillowLeds, pillowLightPatternNumLEDS); //HVIS FARVERNE ER FORKERTE KIG HER 
 }
 
-void pillowLightPatternloop() {
+void pillowLightPatternloop(CRGB environmentColor[]) {
   //Serial.println(peopleCount);
 
   speed = map(peopleCount, 1, 10, 500, 5);

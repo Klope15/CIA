@@ -28,7 +28,7 @@ const char pass[] = "FGeRiGzg";
 
   // ########### MQTT CONFIG ###########
   const String topic = "Bænk";
-  const String senderID = "ESP3"; // Husk at ændre til den ESP du bruger!
+  const String senderID = "ESP1"; // Husk at ændre til den ESP du bruger!
 
   // ____VARIABLES FROM PULTLIGHT____
 
@@ -65,8 +65,12 @@ const char pass[] = "FGeRiGzg";
   int x = 0; // En variable til at gemme hvor meget hver pixel har flyttet sig pr loop
   int speed = 0;
   int peopleCount = 0;
-  CRGB environmentColor[18];
+  CRGB environmentColor_1[18]; // farver for pude 1 med et møster på 18x8 farver 
+  CRGB environmentColor_2[18]; // farver for pude 2 med et møster på 18x8 farver 
+  CRGB environmentColor_3[18]; // farver for pude 3 med et møster på 18x8 farver 
   bool colorSaved = false;
+  int placering = 0;
+
 
   // ________NOW FOLLOWS MAIN PROGRAMS______
 
@@ -82,7 +86,15 @@ const char pass[] = "FGeRiGzg";
   void loop() {
   client.loop();
   pultLightloop(); //main loop for the pult 
-  pillowLightPatternloop(); // main loop for the light on the pillow 
+  if (placering == 1){
+pillowLightPatternloop(environmentColor_1); //fields
+  }
+   else if (placering == 2){
+pillowLightPatternloop(environmentColor_2); //busstop
+  }
+  else if (placering == 3){
+pillowLightPatternloop(environmentColor_3); //grønningen
+  }
   FastLED.show();
   //for(int i=0; i<environmentColor.length(); i++){
   //Serial.println(environmentColor[i]);
