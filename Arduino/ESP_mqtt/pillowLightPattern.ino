@@ -13,7 +13,7 @@ void pillowLightPatternloop() {
     for (int i = 0; i < pillowLightPatternNumLEDS; i++) {
       int pixPos = (i + x) % pillowLightPatternNumLEDS;
 
-      pillowLeds[pixPos] = ColorPattern[i % pillowLightpatternLength];
+      pillowLeds[pixPos] = environmentColor[i % pillowLightpatternLength];
     }
 
     x++;
