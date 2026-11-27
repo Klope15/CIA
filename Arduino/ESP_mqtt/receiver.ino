@@ -36,7 +36,7 @@ if (afsender == "Camera1") {
     Serial.println(": R="); Serial.println(environmentColor[i].r);
     Serial.println(": G="); Serial.println(environmentColor[i].g);
     Serial.println(": B="); Serial.println(environmentColor[i].b);
-    pillowLightPatternloop(1_environmentColor)
+    pillowLightPatternloop(environmentColor_1)
    
   }
   colorSaved = true;
@@ -57,7 +57,7 @@ if (afsender == "Camera2") {
     Serial.println(": R="); Serial.println(environmentColor[i].r);
     Serial.println(": G="); Serial.println(environmentColor[i].g);
     Serial.println(": B="); Serial.println(environmentColor[i].b);
-    pillowLightPatternloop(2_environmentColor)
+    pillowLightPatternloop(environmentColor_2)
    
   }
   colorSaved = true;
@@ -78,7 +78,7 @@ if (afsender == "Camera3") {
     Serial.println(": R="); Serial.println(environmentColor[i].r);
     Serial.println(": G="); Serial.println(environmentColor[i].g);
     Serial.println(": B="); Serial.println(environmentColor[i].b);
-   pillowLightPatternloop(3_environmentColor)
+   pillowLightPatternloop(environmentColor_3)
 
   }
   colorSaved = true;

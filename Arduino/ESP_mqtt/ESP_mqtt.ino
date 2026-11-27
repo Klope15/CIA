@@ -65,9 +65,9 @@ const char pass[] = "FGeRiGzg";
   int x = 0; // En variable til at gemme hvor meget hver pixel har flyttet sig pr loop
   int speed = 0;
   int peopleCount = 0;
-  CRGB 1_environmentColor[18]; // farver for pude 1 med et møster på 18x8 farver 
-  CRGB 2_environmentColor[18]; // farver for pude 2 med et møster på 18x8 farver 
-  CRGB 3_environmentColor[18]; // farver for pude 3 med et møster på 18x8 farver 
+  CRGB environmentColor_1[18]; // farver for pude 1 med et møster på 18x8 farver 
+  CRGB environmentColor_2[18]; // farver for pude 2 med et møster på 18x8 farver 
+  CRGB environmentColor_3[18]; // farver for pude 3 med et møster på 18x8 farver 
   bool colorSaved = false;
 
   // ________NOW FOLLOWS MAIN PROGRAMS______
