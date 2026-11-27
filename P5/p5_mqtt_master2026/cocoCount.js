@@ -1,6 +1,7 @@
 function cocoSetup() {
   createCanvas(640, 480);
   textSize(24);
+  setupComparisonPalette();
     var constraints = {
     video: {
       facingMode: "environment"
@@ -11,33 +12,32 @@ function cocoSetup() {
   
   video.size(640, 480);
   video.hide();
-
 }
 
 function cocoDraw() {
-  image(video, 0, 0);
-  
+  image(video, 0, 0, windowWidth, windowHeight);
+  findEnvironmentColors();  //Function on findfarver.js, that finds and stores the 12 colors in detectedColors array
+  drawDetectedColors();     //Function on findfarver.js, that draws the detected colors in the top 
+  storeEnvironmentColors(); //Function on environmentColors.js, that stores the 12 colors in environmentColors array
+  sendEnvironmentColors();  //Function on environmentColors.js, that sends the 12 colors to the arduino, if they have not been sent yet
   itemCount=0;  //reset counting 
-  
+
   for (let i = 0; i < detections.length; i++) 
   {
     drawResult(detections[i]); //visualize what was detected
-    
     if (detections[i].label === itemToCount) // if the label fits what we are looking for..
     {
       itemCount=itemCount+1; // ...then add 1 to counter
     }
-  
 }
   
-  if(itemCount != previousCount)
-  {
+  if(itemCount != previousCount){
     previousCount =itemCount;
     console.log(itemCount);
     sender(itemCount);
   }
+
   text(itemCount,20,20);
-  
   detect(); //do detection
 } 
 
@@ -48,9 +48,13 @@ function onDetected(error, results) {
     return;
   }
   detections = results;
+  //detect(); // do detection again (er rykket her for at se om det ville gøre at den ikke køre og tjekker heletiden);
 }
 
 function detect() {
+  if (!video || !video.elt || video.elt.readyState < 2) { //Spring detektion over, indtil kamera-streamet er klar med billeddata.
+    return;
+  }
   detector.detect(video, onDetected);
 }
 

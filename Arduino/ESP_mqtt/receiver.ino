@@ -16,6 +16,12 @@ if(afsender == "ESP3"){
     Green = recieverBuffer["val"];
   }
 if (afsender == "Camera1") {
+  if (recieverBuffer["val"].as<int>()){
   peopleCount = recieverBuffer["val"];
+  }
+
+  if (recieverBuffer["val"].as<JsonArray>()){
+  peopleCount = recieverBuffer["val"];
+  }
 }
 }
