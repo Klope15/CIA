@@ -11,7 +11,7 @@ let valgt = 0;   // hvilket punkt er der klikket på? 0 = ingen, 1, 2 eller 3
 // --------------------------------------------
 // MillisUpdate
 // --------------------------------------------
-const WEATHER_REFRESH_INTERVAL = 10000; // 10 sekunder
+const WEATHER_REFRESH_INTERVAL = 1800000; // every 30 minutes 
 let lastWeatherUpdate = 0;
 
 // --------------------------------------------
