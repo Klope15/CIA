@@ -14,9 +14,10 @@
 #define pillowLightPatternDATA_PIN 22
 #define pillowLightpatternLength 18
 
+
 // -- some needed global variables ---
 WiFiClient net;
-MQTTClient client;
+MQTTClient client(1024);
 JsonDocument senderBuffer;
 JsonDocument recieverBuffer;
 // ------------------------------------
@@ -64,7 +65,8 @@ const char pass[] = "FGeRiGzg";
   int x = 0; // En variable til at gemme hvor meget hver pixel har flyttet sig pr loop
   int speed = 0;
   int peopleCount = 0;
-
+  CRGB environmentColor[18];
+  bool colorSaved = false;
 
   // ________NOW FOLLOWS MAIN PROGRAMS______
 
@@ -78,8 +80,12 @@ const char pass[] = "FGeRiGzg";
   }
 
   void loop() {
+  client.loop();
   pultLightloop(); //main loop for the pult 
   pillowLightPatternloop(); // main loop for the light on the pillow 
   FastLED.show();
-
+  //for(int i=0; i<environmentColor.length(); i++){
+  //Serial.println(environmentColor[i]);
+  //}
+  //Serial.println(peopleCount);
   }

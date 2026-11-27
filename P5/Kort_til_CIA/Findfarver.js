@@ -3,24 +3,19 @@ let detectedColors = []; // array to hold the colors detected in the environment
 
 function setupComparisonPalette() {
   comparisonPalette = [
-// red colors
-[245, 66, 144], // intense pink
-[252, 131, 61], // intense orange
-[245, 66, 66], // intense red
-[235, 103, 101], // light red 
-
-//green colors 
-[66, 245, 135], // intense green
-[78, 150, 74], // dark green
-[245, 245, 66], // intense yellow
-[237, 232, 154], // light yellow
-
-//blue colors 
-[66, 135, 245], // intense blue 
-[134, 219, 252], // clear light blue 
-[224, 121, 237], // intense purple
-[14, 37, 110] // dark blue
-  ];
+  [ 10,  70, 255], // Klar himmel – lys blå
+  [  0,  10, 255], // Dybt hav – kraftig blå
+  [  0, 140, 170], // Fjord – turkis
+  [  0, 255,  70], // Havgrøn – frisk mint
+  [  5, 220,  10], // Græs – klar grøn
+  [  0,  90,   8], // Skov – dyb grøn
+  [255,  30,   0], // Solnedgang – orange
+  [180,  12,   2], // Teglsten – varm rødbrun
+  [255,   0,  40], // Rose – stærk pink
+  [110,  40, 255], // Lyng – blød lilla
+  [ 60,   0, 255], // Skumring – violet
+  [ 10,   0, 120], // Nattehimmel – dyb indigo
+]
 }
 
 function colorDistance(c1, c2) { //funktion til at finde afstanden mellem to farver
@@ -32,7 +27,7 @@ function colorDistance(c1, c2) { //funktion til at finde afstanden mellem to far
 }
 
 function findEnvironmentColors() {
- //tjekker om vi allerede har fundet 12 farver, hvis ja, så gør vi ikke mere
+ //tjekker om vi allerede har fundet 18 farver, hvis ja, så gør vi ikke mere
   if (detectedColors.length === maxEnvironmentColors) {
     return; 
   }
@@ -44,7 +39,7 @@ function findEnvironmentColors() {
   detectedColors = []; // Nulstil arrayet
 
   //Kør 12 gange for at få 12 tilfældige punkter
-  for (let i = 0; i < 12; i++) { //køre igennem 12 gange, så vi får 12 forskellige punkter at tage farver fra
+  for (let i = 0; i < maxEnvironmentColors ; i++) { //køre igennem 12 gange, så vi får 12 forskellige punkter at tage farver fra
     let sampleX = floor(random(video.width)); //tager en random x-værdi
     let sampleY = floor(random(video.height)); //tager en random y-værdi
     
@@ -69,7 +64,7 @@ function findEnvironmentColors() {
 }
 
 function drawDetectedColors() { //får at vi kan se hvilke farver der er gemt, tegner vi 12 firkanter i toppen med farverne fra arrayet.
-  let boxWidth = width / 12; 
+  let boxWidth = width / maxEnvironmentColors; 
   for (let i = 0; i < detectedColors.length; i++) {
     fill(detectedColors[i]);
     stroke(0);
