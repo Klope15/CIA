@@ -9,7 +9,7 @@ if(afsender == "ESP1"){
   }
 
 if(afsender == "ESP2"){
-    Blue = recieverBuffer["val"];
+    Yellow = recieverBuffer["val"];
   }
 
 if(afsender == "ESP3"){
