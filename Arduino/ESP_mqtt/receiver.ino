@@ -24,15 +24,21 @@ if(afsender == "ESP3"){
   }
   //From maps
 if(afsender == "kort1" && senderID == "ESP1"){
-    placering = recieverBuffer["val"] | "";
+    placering = recieverBuffer["val"];
+      Serial.print("Placering: ");
+  Serial.println(placering);
   }
 
 if(afsender == "kort2" && senderID == "ESP2"){
-    placering = recieverBuffer["val"] | "";
+    placering = recieverBuffer["val"];
+      Serial.print("Placering: ");
+  Serial.println(placering);
   }
 
 if(afsender == "kort3" && senderID == "ESP3"){
-    placering = recieverBuffer["val"] | "";
+    placering = recieverBuffer["val"];
+      Serial.print("Placering: ");
+  Serial.println(placering);
   }
 
   //From cameras
