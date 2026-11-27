@@ -1,5 +1,4 @@
-void modtager(String &topic, String &indhold) 
-{
+void modtager(String &topic, String &indhold) {
   deserializeJson(recieverBuffer,indhold);
   String afsender = recieverBuffer["from"];
 
@@ -21,7 +20,7 @@ if (afsender == "Camera1") {
   }
 
   if (recieverBuffer["val"].as<JsonArray>()){
-  peopleCount = recieverBuffer["val"];
+  environmentColor = recieverBuffer["val"];
   }
 }
 }
