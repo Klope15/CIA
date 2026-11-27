@@ -352,5 +352,8 @@ function tegnInfoboks(navn, tekst, x, y) {
   text(tekst, boksX + 12, boksY + 56);
 }
 
+function mousePressed() { 
+fullscreen(true);
+}
 
 //hej
